@@ -3,4 +3,4 @@ kind: Provider
 metadata:
   name: provider-opensearch
 spec:
-  package: dkb-bank/provider-opensearch:v0.1.0
+  package: platformdkbcf/provider-opensearch:v0.1.0

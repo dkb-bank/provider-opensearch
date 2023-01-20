@@ -67,7 +67,7 @@ IMAGES = $(PROJECT_NAME)
 XPKG_REG_ORGS ?= platformdkbcf
 # NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
 # inferred.
-XPKG_REG_ORGS_NO_PROMOTE ?= platformdkbcf
+XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io
 XPKGS = $(PROJECT_NAME)
 -include build/makelib/xpkg.mk
 

@@ -38,8 +38,17 @@ type RolesMappingParameters struct {
 	Hosts []*string `json:"hosts,omitempty" tf:"hosts,omitempty"`
 
 	// The name of the security role.
-	// +kubebuilder:validation:Required
-	RoleName *string `json:"roleName" tf:"role_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/dkb-bank/provider-opensearch/apis/opensearch/v1alpha1.Role
+	// +kubebuilder:validation:Optional
+	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
+
+	// Reference to a Role in opensearch to populate roleName.
+	// +kubebuilder:validation:Optional
+	RoleNameRef *v1.Reference `json:"roleNameRef,omitempty" tf:"-"`
+
+	// Selector for a Role in opensearch to populate roleName.
+	// +kubebuilder:validation:Optional
+	RoleNameSelector *v1.Selector `json:"roleNameSelector,omitempty" tf:"-"`
 
 	// A list of users.
 	// +kubebuilder:validation:Optional

@@ -1,22 +1,21 @@
-apiVersion: index.opensearch.crossplane.io/v1alpha1
+apiVersion: component.opensearch.crossplane.io/v1alpha1
 kind: Template
 metadata:
   annotations:
-    meta.upbound.io/example-id: opensearch/v1alpha1/indextemplate
+    meta.upbound.io/example-id: opensearch/v1alpha1/componenttemplate
   labels:
-    testing.upbound.io/example-name: writer
-  name: writer
+    testing.upbound.io/example-name: template1
+  name: template1
 spec:
   forProvider:
-    name: indextemplate
+    name: template1
     body: |
       {
-        "template": "te*",
-        "settings": {
-          "number_of_shards": 1
-        },
-        "mappings": {
-          "type1": {
+        "template": {
+          "settings": {
+            "number_of_shards": 1
+          },
+          "mappings": {
             "_source": {
               "enabled": false
             },
@@ -26,7 +25,7 @@ spec:
               },
               "created_at": {
                 "type": "date",
-                "format": "EEE MMM dd HH:mm:ss Z YYYY"
+                "format": "EEE MMM dd HH:mm:ss Z yyyy"
               }
             }
           }

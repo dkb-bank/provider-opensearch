@@ -12,7 +12,9 @@ spec:
     - arn:aws:iam::123456789012:role/lambda-call-elasticsearch
     - arn:aws:iam::123456789012:role/run-containers
     description: Mapping AWS IAM roles to ES role
-    roleName: logs_writer
+    roleNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

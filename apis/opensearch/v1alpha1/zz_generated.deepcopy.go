@@ -10,6 +10,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
+	"github.com/crossplane/crossplane-runtime/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -707,6 +708,16 @@ func (in *RolesMappingParameters) DeepCopyInto(out *RolesMappingParameters) {
 		in, out := &in.RoleName, &out.RoleName
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleNameRef != nil {
+		in, out := &in.RoleNameRef, &out.RoleNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleNameSelector != nil {
+		in, out := &in.RoleNameSelector, &out.RoleNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Users != nil {
 		in, out := &in.Users, &out.Users

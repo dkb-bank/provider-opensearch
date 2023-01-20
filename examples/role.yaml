@@ -1,0 +1,24 @@
+apiVersion: opensearch.opensearch.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1alpha1/role
+  labels:
+    testing.upbound.io/example-name: test-role
+  name: test-role
+spec:
+  forProvider:
+    roleName: test-role
+    clusterPermissions:
+    - 'cluster_composite_ops'
+    - 'indices_monitor'
+    indexPermissions:
+    - allowedActions:
+      - read
+      indexPatterns:
+      - movies*
+    tenantPermissions:
+    - allowedActions:
+      - kibana_all_write
+      tenantPatterns:
+      - human_resources

@@ -1,0 +1,18 @@
+apiVersion: opensearch.opensearch.crossplane.io/v1alpha1
+kind: RolesMapping
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1alpha1/rolesmapping
+  labels:
+    testing.upbound.io/example-name: mapper
+  name: mapper
+spec:
+  forProvider:
+    backendRoles:
+    - arn:aws:iam::123456789012:role/lambda-call-elasticsearch
+    - arn:aws:iam::123456789012:role/run-containers
+    description: Mapping AWS IAM roles to ES role
+    roleName: logs_writer
+
+---
+

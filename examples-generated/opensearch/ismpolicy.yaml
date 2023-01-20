@@ -1,0 +1,15 @@
+apiVersion: opensearch.opensearch.crossplane.io/v1alpha1
+kind: IsmPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1alpha1/ismpolicy
+  labels:
+    testing.upbound.io/example-name: cleanup
+  name: cleanup
+spec:
+  forProvider:
+    body: ${file("${path.module}/policies/delete_after_15d.json")}
+    policyId: delete_after_15d
+
+---
+

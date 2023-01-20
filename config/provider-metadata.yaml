@@ -1,0 +1,534 @@
+name: phillbaker/elasticsearch
+resources:
+    elasticsearch_cluster_settings Resource - terraform-provider-elasticsearch:
+        subCategory: Elasticsearch Opensource
+        description: Manages a cluster's (persistent) settings.
+        name: elasticsearch_cluster_settings Resource - terraform-provider-elasticsearch
+        title: elasticsearch_cluster_settings Resource - terraform-provider-elasticsearch
+        argumentDocs: {}
+        importStatements: []
+    elasticsearch_component_template Resource - terraform-provider-elasticsearch:
+        subCategory: Elasticsearch Opensource
+        description: Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases. You cannot directly apply a component template to a data stream or index. To be applied, a component template must be included in an index template’s composed_of list.
+        name: elasticsearch_component_template Resource - terraform-provider-elasticsearch
+        title: elasticsearch_component_template Resource - terraform-provider-elasticsearch
+        argumentDocs:
+            body: (String) The JSON body of the template.
+            id: (String) The ID of this resource.
+            name: (String) Name of the component template to create.
+        importStatements:
+            - |-
+              # Import by name
+              terraform import elasticsearch_component_template.test terraform-test
+    elasticsearch_composable_index_template:
+        subCategory: Elasticsearch Opensource
+        description: Provides an Elasticsearch Composable index template resource.
+        name: elasticsearch_composable_index_template
+        title: elasticsearch_composable_index_template
+        argumentDocs:
+            body: '- (Required) The JSON body of the index template.'
+            id: '- The name of the index template.'
+            name: '- (Required) The name of the index template.'
+        importStatements: []
+    elasticsearch_data_stream Resource - terraform-provider-elasticsearch:
+        subCategory: Elasticsearch Opensource
+        description: A data stream lets you store append-only time series data across multiple (hidden, auto-generated) indices while giving you a single named resource for requests. See the guide https://www.elastic.co/guide/en/elasticsearch/reference/7.17/data-streams.html and API docs https://www.elastic.co/guide/en/elasticsearch/reference/7.17/data-stream-apis.html.
+        name: elasticsearch_data_stream Resource - terraform-provider-elasticsearch
+        title: elasticsearch_data_stream Resource - terraform-provider-elasticsearch
+        argumentDocs: {}
+        importStatements: []
+    elasticsearch_index Resource - terraform-provider-elasticsearch:
+        subCategory: Elasticsearch Opensource
+        description: Provides an Elasticsearch index resource.
+        name: elasticsearch_index Resource - terraform-provider-elasticsearch
+        title: elasticsearch_index Resource - terraform-provider-elasticsearch
+        argumentDocs:
+            '"false"': when trying to create an index on a v6 cluster without a doc type or set to "true" when trying to create an index on a v7 cluster with a doc type. Since mapping updates are not currently supported, this applies only on index create.
+            "-1": to disable refresh.
+            _source: to include in the slowlog lines, false or 0 will skip logging the source entirely and setting it to true will log the entire source regardless of size. The original _source is reformatted by default to make sure that it fits on a single log line.
+            all: ', primaries , new_primaries , none.'
+            default: value compresses stored data with LZ4 compression, but this can be set to best_compression which uses DEFLATE for a higher compression ratio. This can be set only on creation.
+            docvalue_fields: that are allowed in a query. A stringified number.
+            "false": ', true, checksum.'
+            from + size: for inner hits definition and top hits aggregations to this index. A stringified number.
+            index.blocks.read_only: but allows deleting the index to free up resources.
+            script_fields: that are allowed in a query. A stringified number.
+            "true": to disable index metadata reads and writes.
+            warn: ', info, debug, trace'
+            window_size: for rescore requests in searches of this index. A stringified number.
+        importStatements:
+            - |-
+              # Import by name
+              terraform import elasticsearch_index.test terraform-test
+    elasticsearch_index_template:
+        subCategory: Elasticsearch Opensource
+        description: Provides an Elasticsearch index template resource.
+        name: elasticsearch_index_template
+        title: elasticsearch_index_template
+        argumentDocs:
+            body: '- (Required) The JSON body of the index template.'
+            id: '- The name of the index template.'
+            name: '- (Required) The name of the index template.'
+        importStatements: []
+    elasticsearch_ingest_pipeline:
+        subCategory: Elasticsearch Opensource
+        description: Provides an Elasticsearch ingest pipeline resource.
+        name: elasticsearch_ingest_pipeline
+        title: elasticsearch_ingest_pipeline
+        argumentDocs:
+            body: '- (Required) The JSON body of the ingest pipeline'
+            id: '- The name of the ingest pipeline.'
+            name: '- (Required) The name of the ingest pipeline'
+        importStatements: []
+    elasticsearch_kibana_alert Resource - terraform-provider-elasticsearch:
+        subCategory: Elasticsearch Xpack
+        description: Alerts allow you to define rules to detect conditions and trigger actions when those conditions are met. Alerts work by running checks on a schedule to detect conditions. When a condition is met, the alert tracks it as an alert instance and responds by triggering one or more actions. Actions typically involve interaction with Kibana services or third party integrations. For more see the docs https://www.elastic.co/guide/en/kibana/current/alerting-getting-started.html.
+        name: elasticsearch_kibana_alert Resource - terraform-provider-elasticsearch
+        title: elasticsearch_kibana_alert Resource - terraform-provider-elasticsearch
+        argumentDocs:
+            .index: ', .webhook, etc.'
+            .index-threshold: .
+            alerts: .
+            message: .
+            onActionGroupChange: ', onActiveAlert, or onThrottleInterval. Only available in Kibana >= 7.11'
+            params: . There may be specific attributes for different alert types. Either params_json or conditions must be specified. (see below for nested schema)
+            threshold met: or recovered.
+        importStatements:
+            - |-
+              # Import by name
+              terraform import elasticsearch_kibana_alert.test terraform-alert
+    elasticsearch_kibana_object:
+        subCategory: Elasticsearch Opensource
+        description: Provides an Elasticsearch kibana object resource.
+        name: elasticsearch_kibana_object
+        title: elasticsearch_kibana_object
+        argumentDocs:
+            body: '- (Required) The JSON body of the kibana object.'
+            id: '- The identifier of the kibana object.'
+            index: '- (Optional) The name of the index where kibana data is stored.'
+        importStatements: []
+    elasticsearch_opensearch_audit_config Resource - terraform-provider-elasticsearch:
+        subCategory: Elasticsearch Opensource
+        description: Audit config lets you configure the security plugin audit log settings. See the guide https://opensearch.org/docs/latest/security-plugin/audit-logs/index/ and AWS specific information https://docs.aws.amazon.com/opensearch-service/latest/developerguide/audit-logs.html.
+        name: elasticsearch_opensearch_audit_config Resource - terraform-provider-elasticsearch
+        title: elasticsearch_opensearch_audit_config Resource - terraform-provider-elasticsearch
+        argumentDocs: {}
+        importStatements: []
+    elasticsearch_opensearch_destination Resource - terraform-provider-elasticsearch:
+        subCategory: OpenSearch
+        description: Provides an OpenSearch destination, a reusable communication channel for an action, such as email, Slack, or a webhook URL. Please refer to the OpenSearch destination documentation https://opendistro.github.io/for-elasticsearch-docs/docs/alerting/monitors/#create-destinations for details.
+        name: elasticsearch_opensearch_destination Resource - terraform-provider-elasticsearch
+        title: elasticsearch_opensearch_destination Resource - terraform-provider-elasticsearch
+        argumentDocs: {}
+        importStatements:
+            - |-
+              # Import by name
+              terraform import elasticsearch_opensearch_destination.test_destination my-destination
+    elasticsearch_opensearch_ism_policy:
+        subCategory: OpenSearch
+        description: Provides an Elasticsearch Open Distro ISM policy.
+        name: elasticsearch_opensearch_ism_policy
+        title: elasticsearch_opensearch_ism_policy
+        examples:
+            - name: cleanup
+              manifest: |-
+                {
+                  "body": "${file(\"${path.module}/policies/delete_after_15d.json\")}",
+                  "policy_id": "delete_after_15d"
+                }
+        argumentDocs:
+            body: |-
+                -
+                (Required) The policy document.
+            id: |-
+                -
+                The id of the ISM policy.
+            policy_id: |-
+                -
+                (Required) The id of the ISM policy.
+            primary_term: |-
+                -
+                The primary term of the ISM policy version.
+            seq_no: |-
+                -
+                The sequence number of the ISM policy version.
+        importStatements: []
+    elasticsearch_opensearch_ism_policy_mapping Resource - terraform-provider-elasticsearch:
+        subCategory: OpenSearch
+        description: Provides an OpenSearch Index State Management (ISM) policy. Please refer to the Open Distro ISM documentation https://opendistro.github.io/for-elasticsearch-docs/docs/ism/ for details.
+        name: elasticsearch_opensearch_ism_policy_mapping Resource - terraform-provider-elasticsearch
+        title: elasticsearch_opensearch_ism_policy_mapping Resource - terraform-provider-elasticsearch
+        argumentDocs: {}
+        importStatements:
+            - |-
+              # Import by poilcy_id
+              terraform import elasticsearch_opensearch_ism_policy_mapping.test policy_1
+    elasticsearch_opensearch_kibana_tenant:
+        subCategory: OpenSearch
+        description: Provides an Elasticsearch OpenSearch Kibana tenant resource.
+        name: elasticsearch_opensearch_kibana_tenant
+        title: elasticsearch_opensearch_kibana_tenant
+        examples:
+            - name: test
+              manifest: |-
+                {
+                  "description": "test tenant",
+                  "tenant_name": "test"
+                }
+        argumentDocs:
+            description: |-
+                -
+                (Optional) Description of the tenant.
+            id: |-
+                -
+                The name of the tenant.
+            tenant_name: |-
+                -
+                (Required) The name of the tenant.
+        importStatements: []
+    elasticsearch_opensearch_monitor:
+        subCategory: OpenSearch
+        description: Provides an Elasticsearch OpenSearch monitor.
+        name: elasticsearch_opensearch_monitor
+        title: elasticsearch_opensearch_monitor
+        examples:
+            - name: movies_last_hour
+              manifest: |-
+                {
+                  "body": "{\n  \"name\": \"test-monitor\",\n  \"type\": \"monitor\",\n  \"enabled\": true,\n  \"schedule\": {\n    \"period\": {\n      \"interval\": 1,\n      \"unit\": \"MINUTES\"\n    }\n  },\n  \"inputs\": [{\n    \"search\": {\n      \"indices\": [\"movies\"],\n      \"query\": {\n        \"size\": 0,\n        \"aggregations\": {},\n        \"query\": {\n          \"bool\": {\n            \"adjust_pure_negative\":true,\n            \"boost\":1,\n            \"filter\": [{\n              \"range\": {\n                \"@timestamp\": {\n                  \"boost\":1,\n                  \"from\":\"||-1h\",\n                  \"to\":\"\",\n                  \"include_lower\":true,\n                  \"include_upper\":true,\n                  \"format\": \"epoch_millis\"\n                }\n              }\n            }]\n          }\n        }\n      }\n    }\n  }],\n  \"triggers\": [\n    {\n      \"name\" : \"Errors\",\n      \"severity\" : \"1\",\n      \"condition\" : {\n        \"script\" : {\n          \"source\" : \"ctx.results[0].hits.total.value \u003e 0\",\n          \"lang\" : \"painless\"\n        }\n      },\n      \"actions\" : [\n        {\n          \"name\" : \"Slack\",\n          \"destination_id\" : \"${elasticsearch_opensearch_destination.slack_on_call_channel.id}\",\n          \"message_template\" : {\n            \"source\" : \"bogus\",\n            \"lang\" : \"mustache\"\n          },\n          \"throttle_enabled\" : false,\n          \"subject_template\" : {\n            \"source\" : \"Production Errors\",\n            \"lang\" : \"mustache\"\n          }\n        }\n      ]\n    }\n  ]\n}\n"
+                }
+        argumentDocs:
+            body: |-
+                -
+                (Required) The policy document.
+            id: |-
+                -
+                The id of the monitor.
+        importStatements: []
+    elasticsearch_opensearch_role:
+        subCategory: OpenSearch
+        description: Provides an Elasticsearch OpenSearch security role resource.
+        name: elasticsearch_opensearch_role
+        title: elasticsearch_opensearch_role
+        examples:
+            - name: writer
+              manifest: |-
+                {
+                  "cluster_permissions": [
+                    "*"
+                  ],
+                  "description": "Logs writer role",
+                  "index_permissions": [
+                    {
+                      "allowed_actions": [
+                        "write"
+                      ],
+                      "index_patterns": [
+                        "logstash-*"
+                      ]
+                    }
+                  ],
+                  "role_name": "logs_writer",
+                  "tenant_permissions": [
+                    {
+                      "allowed_actions": [
+                        "kibana_all_write"
+                      ],
+                      "tenant_patterns": [
+                        "logstash-*"
+                      ]
+                    }
+                  ]
+                }
+            - name: writer
+              manifest: |-
+                {
+                  "cluster_permissions": [
+                    "*"
+                  ],
+                  "index_permissions": [
+                    {
+                      "allowed_actions": [
+                        "read"
+                      ],
+                      "document_level_security": "{\"term\": { \"readable_by\": \"${user.name}\"}}",
+                      "index_patterns": [
+                        "pub*"
+                      ]
+                    }
+                  ],
+                  "role_name": "foo_writer"
+                }
+        argumentDocs:
+            allowed_actions: |-
+                -
+                (Optional) A list of allowed actions.
+            cluster_permissions: |-
+                -
+                (Optional) A list of cluster permissions.
+            description: |-
+                -
+                (Optional) Description of the role.
+            document_level_security: |-
+                -
+                (Optional) A selector for [document-level security][2] (json formatted using jsonencode).
+            field_level_security: |-
+                -
+                (Optional) A list of selectors for field-level security.
+            id: |-
+                -
+                The name of the security role.
+            index_patterns: |-
+                -
+                (Optional) A list of glob patterns for the index names.
+            index_permissions: |-
+                -
+                (Optional) A configuration of index permissions (documented below).
+            masked_fields: |-
+                -
+                (Optional) A list of masked fields.
+            role_name: |-
+                -
+                (Required) The name of the security role.
+            tenant_patterns: |-
+                -
+                (Optional) A list of glob patterns for the tenant names.
+            tenant_permissions: |-
+                -
+                (Optional) A configuration of tenant permissions (documented below).
+        importStatements: []
+    elasticsearch_opensearch_roles_mapping:
+        subCategory: OpenSearch
+        description: Provides an Elasticsearch OpenSearch security role mapping.
+        name: elasticsearch_opensearch_roles_mapping
+        title: elasticsearch_opensearch_roles_mapping
+        examples:
+            - name: mapper
+              manifest: |-
+                {
+                  "backend_roles": [
+                    "arn:aws:iam::123456789012:role/lambda-call-elasticsearch",
+                    "arn:aws:iam::123456789012:role/run-containers"
+                  ],
+                  "description": "Mapping AWS IAM roles to ES role",
+                  "role_name": "logs_writer"
+                }
+        argumentDocs:
+            and_backend_roles: |-
+                -
+                (Optional) A list of backend roles.
+            backend_roles: |-
+                -
+                (Optional) A list of backend roles.
+            description: |-
+                -
+                (Optional) Description of the role mapping.
+            hosts: |-
+                -
+                (Optional) A list of host names.
+            id: |-
+                -
+                The name of the security role.
+            role_name: |-
+                -
+                (Required) The name of the security role.
+            users: |-
+                -
+                (Optional) A list of users.
+        importStatements: []
+    elasticsearch_opensearch_user:
+        subCategory: OpenSearch
+        description: Provides an Elasticsearch OpenSearch security user.
+        name: elasticsearch_opensearch_user
+        title: elasticsearch_opensearch_user
+        examples:
+            - name: mapper
+              manifest: |-
+                {
+                  "description": "a reader role for our app",
+                  "password": "SuperSekret123!",
+                  "username": "app-reader"
+                }
+            - name: reader
+              manifest: |-
+                {
+                  "password": "${var.password}",
+                  "username": "app-reader"
+                }
+              references:
+                password: var.password
+              dependencies:
+                elasticsearch_opensearch_role.reader: |-
+                    {
+                      "description": "App Reader Role",
+                      "index_permissions": [
+                        {
+                          "allowed_actions": [
+                            "get",
+                            "read",
+                            "search"
+                          ],
+                          "index_patterns": [
+                            "app-*"
+                          ]
+                        }
+                      ],
+                      "role_name": "app_reader"
+                    }
+                elasticsearch_opensearch_roles_mapping.reader: |-
+                    {
+                      "description": "App Reader Role",
+                      "role_name": "${elasticsearch_opensearch_role.reader.id}",
+                      "users": [
+                        "${elasticsearch_opensearch_user.reader.id}"
+                      ]
+                    }
+        argumentDocs:
+            attributes: |-
+                -
+                (Optional) A map of arbitrary key value string pairs stored alongside of users.
+            backend_roles: |-
+                -
+                (Optional) A list of backend roles.
+            description: |-
+                -
+                (Optional) Description of the user.
+            id: |-
+                -
+                The name of the security user.
+            password: |-
+                -
+                (Optional) The plain text password for the user, cannot be specified with password_hash.
+                Some implementations may enforce a password policy. Invalid passwords may cause a non-descriptive
+                HTTP 400 Bad Request error. For AWS Elasticsearch domains "password must be at least 8 characters
+                long and contain at least one uppercase letter, one lowercase letter, one digit, and one special
+                character".
+            password_hash: |-
+                -
+                (Optional) The pre-hashed password for the user, cannot be specified with password.
+            username: |-
+                -
+                (Required) The name of the security role.
+        importStatements: []
+    elasticsearch_script:
+        subCategory: Elasticsearch Opensource
+        description: Provides an Elasticsearch Opensource script resource.
+        name: elasticsearch_script
+        title: elasticsearch_script
+        argumentDocs:
+            id: '- The name of the script.'
+            lang: '- Specifies the language the script is written in. Defaults to painless..'
+            script_id: '- (Required) The name of the script.'
+            source: '- (Required) The source of the stored script.'
+        importStatements: []
+    elasticsearch_snapshot_repository:
+        subCategory: Elasticsearch Opensource
+        description: Provides an Elasticsearch snapshot repository resource.
+        name: elasticsearch_snapshot_repository
+        title: elasticsearch_snapshot_repository
+        examples:
+            - name: repo
+              manifest: |-
+                {
+                  "name": "es-index-backups",
+                  "settings": {
+                    "bucket": "es-index-backups",
+                    "region": "us-east-1",
+                    "role_arn": "arn:aws:iam::123456789012:role/MyElasticsearchRole"
+                  },
+                  "type": "s3"
+                }
+        argumentDocs:
+            id: '- The name of the snapshot repository.'
+            name: '- (Required) The name of the repository.'
+            settings: '- (Optional) The settings map applicable for the backend (documented here for official plugins).'
+            type: '- (Required) The name of the repository backend (required plugins must be installed).'
+        importStatements: []
+    elasticsearch_xpack_index_lifecycle_policy:
+        subCategory: Elasticsearch Xpack
+        description: Provides an Elasticsearch XPack index lifecycle policy resource.
+        name: elasticsearch_xpack_index_lifecycle_policy
+        title: elasticsearch_xpack_index_lifecycle_policy
+        argumentDocs:
+            body: '- (Required) The JSON body of the xpack index_lifecycle_policy.'
+            id: '- The name of the xpack index_lifecycle_policy.'
+            name: '- (Required) The name of the xpack index_lifecycle_policy.'
+        importStatements: []
+    elasticsearch_xpack_license:
+        subCategory: Elasticsearch Xpack
+        description: Provides an Elasticsearch XPack license resource.
+        name: elasticsearch_xpack_license
+        title: elasticsearch_xpack_license
+        argumentDocs:
+            id: '- The unique identifier of the xpack license as returned by the Elasticsearch API.'
+            license: '- (Optional) The JSON string of the enterprise license file.'
+            use_basic_license: '- (Optional) Boolean, whether to use a basic license, cannot be used with license.'
+        importStatements: []
+    elasticsearch_xpack_role:
+        subCategory: Elasticsearch Xpack
+        description: Provides an Elasticsearch XPack role resource.
+        name: elasticsearch_xpack_role
+        title: elasticsearch_xpack_role
+        argumentDocs:
+            application: '- (Required) The name of the application to which this entry applies'
+            applications: '- (Optional) A configuration of application objects (see below).'
+            except: '- (Optional) Specify denied fields for a role. The denied fields must be a subset of the fields to which permissions were granted. Defining denied and granted fields implies access to all granted fields except those which match the pattern in the denied fields.'
+            field_security: '- (Optional) A configuration of field security objects (see below). The absence of field_security in a role is equivalent to * access.'
+            global: '- (Optional) A JSON string of an object defining global privileges. A global privilege is a form of cluster privilege that is request-aware.'
+            grant: '- (Optional) Specifies the fields that a role can access as part of the indices permissions. Wildcards are supported.'
+            id: '- The name of the xpack role.'
+            indices: '- (Optional) A configuration of index objects (see below).'
+            metadata: '- (Optional) A JSON string of arbitrary key value pairs, keys cannot start with _.'
+            names: '- (Required) A list of index names.'
+            privileges: '- (Required) The index level privileges that the owners of the role have on the specified indices.'
+            query: '- (Optional) A search query that defines the documents the owners of the role have read access to. A document within the specified indices must match this query in order for it to be accessible by the owners of the role.'
+            resources: '- (Optional) A list resources to which the privileges are applied'
+            role_name: '- (Required) The name of the xpack role.'
+            run_as: '- (Optional) A list of users that the owners of this role can impersonate'
+        importStatements: []
+    elasticsearch_xpack_role_mapping Resource - terraform-provider-elasticsearch:
+        subCategory: Elasticsearch Xpack
+        description: Provides an Elasticsearch XPack role mapping resource. Role mappings define which roles are assigned to each user. Each mapping has rules that identify users and a list of roles that are granted to those users. See the upstream docs https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api.html for more details.
+        name: elasticsearch_xpack_role_mapping Resource - terraform-provider-elasticsearch
+        title: elasticsearch_xpack_role_mapping Resource - terraform-provider-elasticsearch
+        argumentDocs:
+            _: are reserved for system usage.
+            all: and any top level keys.
+            enabled: set to false are ignored when role mapping is performed.
+        importStatements:
+            - |-
+              # Import by name
+              terraform import elasticsearch_xpack_role_mapping.test test
+    elasticsearch_xpack_snapshot_lifecycle_policy Resource - terraform-provider-elasticsearch:
+        subCategory: Elasticsearch Xpack
+        description: Provides an Elasticsearch XPack snapshot lifecycle management policy. These automatically take snapshots and control how long they are retained. See the upstream docs https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-lifecycle-management-api.html for more details.
+        name: elasticsearch_xpack_snapshot_lifecycle_policy Resource - terraform-provider-elasticsearch
+        title: elasticsearch_xpack_snapshot_lifecycle_policy Resource - terraform-provider-elasticsearch
+        argumentDocs: {}
+        importStatements:
+            - |-
+              # Import by name
+              terraform import elasticsearch_xpack_snapshot_lifecycle_policy.terraform-test test
+    elasticsearch_xpack_user Resource - terraform-provider-elasticsearch:
+        subCategory: Elasticsearch Xpack
+        description: Provides an Elasticsearch XPack user resource. See the upstream docs https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api.html for more details.
+        name: elasticsearch_xpack_user Resource - terraform-provider-elasticsearch
+        title: elasticsearch_xpack_user Resource - terraform-provider-elasticsearch
+        argumentDocs:
+            password: ', one of which must be provided at creation.'
+            password_hash: ', one of which must be provided at creation.'
+        importStatements:
+            - |-
+              # Import by username
+              terraform import elasticsearch_xpack_user.test johndoe
+    elasticsearch_xpack_watch:
+        subCategory: Elasticsearch Xpack
+        description: Provides an Elasticsearch XPack watch resource.
+        name: elasticsearch_xpack_watch
+        title: elasticsearch_xpack_watch
+        argumentDocs:
+            active: '- (Optional) Boolean to activate the xpack watcher, defaults true'
+            body: '- (Required) The JSON body of the xpack watch.'
+            id: '- The name of the xpack watch.'
+            watch_id: '- (Required) The name of the xpack watch.'
+        importStatements: []

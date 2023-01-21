@@ -14,7 +14,6 @@ export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-elasticsearch_2.0.
 export TERRAFORM_DOCS_PATH := docs/resources
 
 PLATFORMS ?= linux_amd64 linux_arm64
-
 # -include will silently skip missing files, which allows us
 # to load those files with a target in the Makefile. If only
 # "include" was used, the make command would fail and refuse
@@ -57,9 +56,27 @@ UPTEST_VERSION = v0.2.1
 # ====================================================================================
 # Setup Images
 
-REGISTRY_ORGS ?= platformdkbcf
+REGISTRY_ORGS ?= index.docker.io/platformdkbcf
 IMAGES = $(PROJECT_NAME)
 -include build/makelib/imagelight.mk
+
+# ====================================================================================
+# Setup XPKG
+
+XPKG_REG_ORGS ?= index.docker.io/platformdkbcf
+# NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
+# inferred.
+XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/dkb-bank
+XPKGS = $(PROJECT_NAME)
+-include build/makelib/xpkg.mk
+
+# NOTE(hasheddan): we force image building to happen prior to xpkg build so that
+# we ensure image is present in daemon.
+xpkg.build.provider-opensearch: do.build.images
+
+# NOTE(hasheddan): we ensure up is installed prior to running platform-specific
+# build steps in parallel to avoid encountering an installation race condition.
+build.init: $(UP)
 
 # ====================================================================================
 # Fallthrough

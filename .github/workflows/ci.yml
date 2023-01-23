@@ -17,7 +17,6 @@ env:
   # Common users. We can't run a step 'if secrets.AWS_USR != ""' but we can run
   # a step 'if env.AWS_USR' != ""', so we copy these to succinctly test whether
   # credentials have been provided before trying to run steps that need them.
-  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.XPKG_ACCESS_ID }}
   XPKG_ACCESS_ID: ${{ secrets.XPKG_ACCESS_ID }}
   DOCKER_USR: ${{ secrets.DOCKER_USR }}
   AWS_USR: ${{ secrets.AWS_USR }}
@@ -244,33 +243,16 @@ jobs:
           username: ${{ secrets.XPKG_ACCESS_ID }}
           password: ${{ secrets.XPKG_TOKEN }}
 
-      - name: Publish Artifacts
-        run: make publish BRANCH_NAME=${GITHUB_REF##*/}
-        if: env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR != ''
-        env:
-          UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.XPKG_ACCESS_ID }}
-          UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.XPKG_TOKEN }}
-
       - name: Login to Docker
         uses: docker/login-action@v1
         if: env.DOCKER_USR != ''
         with:
           username: ${{ secrets.DOCKER_USR }}
           password: ${{ secrets.DOCKER_PSW }}
-      
-      - name: Publish Artifacts to S3 and Docker Hub
-        run: make -j2 publish BRANCH_NAME=${GITHUB_REF##*/}
-        if: env.AWS_USR != '' && env.DOCKER_USR != ''
+
+      - name: Publish Artifacts
+        run: make publish BRANCH_NAME=${GITHUB_REF##*/}
+        if: env.XPKG_ACCESS_ID != ''
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_USR }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PSW }}
-          GIT_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Promote Artifacts in S3 and Docker Hub
-        if: github.ref == 'refs/heads/main' && env.AWS_USR != '' && env.DOCKER_USR != ''
-        run: make -j2 promote
-        env:
-          BRANCH_NAME: main
-          CHANNEL: main
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_USR }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PSW }}
+          UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.XPKG_ACCESS_ID }}
+          UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.XPKG_TOKEN }}

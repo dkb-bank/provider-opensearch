@@ -3,7 +3,7 @@
 `provider-opensearch` is a [Crossplane](https://crossplane.io/) provider that
 is built using [Upjet](https://github.com/upbound/upjet) code
 generation tools and exposes XRM-conformant managed resources for the
-OpenSearch API.
+OpenSearch API. It was generated from the [terraform-provider-elasticsearch](https://github.com/phillbaker/terraform-provider-elasticsearch) by @phillbaker.
 
 ## Getting Started
 

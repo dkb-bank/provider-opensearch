@@ -11,6 +11,7 @@ import (
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
 	elasticsearchcomponenttemplate "github.com/dkb-bank/provider-opensearch/config/elasticsearchcomponenttemplate"
+	elasticsearchdatastream "github.com/dkb-bank/provider-opensearch/config/elasticsearchdatastream"
 	elasticsearchindextemplate "github.com/dkb-bank/provider-opensearch/config/elasticsearchindextemplate"
 	opensearchismpolicy "github.com/dkb-bank/provider-opensearch/config/opensearchismpolicy"
 	opensearchismpolicymapping "github.com/dkb-bank/provider-opensearch/config/opensearchismpolicymapping"
@@ -43,6 +44,7 @@ func GetProvider() *ujconfig.Provider {
 		// add custom config functions
 		opensearchrole.Configure,
 		elasticsearchindextemplate.Configure,
+		elasticsearchdatastream.Configure,
 		opensearchismpolicy.Configure,
 		opensearchismpolicymapping.Configure,
 		opensearchrolemapping.Configure,

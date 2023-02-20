@@ -12,6 +12,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"elasticsearch_opensearch_role":               config.IdentifierFromProvider,
 	"elasticsearch_opensearch_roles_mapping":      config.IdentifierFromProvider,
 	"elasticsearch_index_template":                config.IdentifierFromProvider,
+	"elasticsearch_data_stream":                   config.IdentifierFromProvider,
 	"elasticsearch_opensearch_ism_policy":         config.IdentifierFromProvider,
 	"elasticsearch_opensearch_ism_policy_mapping": config.IdentifierFromProvider,
 	"elasticsearch_component_template":            config.IdentifierFromProvider,

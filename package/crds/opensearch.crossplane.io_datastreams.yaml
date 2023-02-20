@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: roles.opensearch.opensearch.crossplane.io
+  name: datastreams.opensearch.crossplane.io
 spec:
-  group: opensearch.opensearch.crossplane.io
+  group: opensearch.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - opensearch
-    kind: Role
-    listKind: RoleList
-    plural: roles
-    singular: role
+    kind: DataStream
+    listKind: DataStreamList
+    plural: datastreams
+    singular: datastream
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Role is the Schema for the Roles API. Provides an Elasticsearch
-          OpenSearch security role resource.
+        description: DataStream is the Schema for the DataStreams API. <no value>
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: RoleSpec defines the desired state of Role
+            description: DataStreamSpec defines the desired state of DataStream
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,67 +63,11 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  clusterPermissions:
-                    description: A list of cluster permissions.
-                    items:
-                      type: string
-                    type: array
-                  description:
-                    description: Description of the role.
+                  name:
+                    description: Name of the data stream to create, must have a matching
                     type: string
-                  indexPermissions:
-                    description: A configuration of index permissions (documented
-                      below).
-                    items:
-                      properties:
-                        allowedActions:
-                          description: A list of allowed actions.
-                          items:
-                            type: string
-                          type: array
-                        documentLevelSecurity:
-                          description: A selector for [document-level security][2]
-                            (json formatted using jsonencode).
-                          type: string
-                        fieldLevelSecurity:
-                          description: A list of selectors for field-level security.
-                          items:
-                            type: string
-                          type: array
-                        indexPatterns:
-                          description: A list of glob patterns for the index names.
-                          items:
-                            type: string
-                          type: array
-                        maskedFields:
-                          description: A list of masked fields.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  roleName:
-                    description: The name of the security role.
-                    type: string
-                  tenantPermissions:
-                    description: A configuration of tenant permissions (documented
-                      below).
-                    items:
-                      properties:
-                        allowedActions:
-                          description: A list of allowed actions.
-                          items:
-                            type: string
-                          type: array
-                        tenantPatterns:
-                          description: A list of glob patterns for the tenant names.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
                 required:
-                - roleName
+                - name
                 type: object
               providerConfigRef:
                 default:
@@ -298,12 +241,11 @@ spec:
             - forProvider
             type: object
           status:
-            description: RoleStatus defines the observed state of Role.
+            description: DataStreamStatus defines the observed state of DataStream.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The name of the security role.
                     type: string
                 type: object
               conditions:

@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: templates.component.opensearch.crossplane.io
+  name: indextemplates.opensearch.crossplane.io
 spec:
-  group: component.opensearch.crossplane.io
+  group: opensearch.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - opensearch
-    kind: Template
-    listKind: TemplateList
-    plural: templates
-    singular: template
+    kind: IndexTemplate
+    listKind: IndexTemplateList
+    plural: indextemplates
+    singular: indextemplate
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Template is the Schema for the Templates API. <no value>
+        description: IndexTemplate is the Schema for the IndexTemplates API. Provides
+          an Elasticsearch index template resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: TemplateSpec defines the desired state of Template
+            description: IndexTemplateSpec defines the desired state of IndexTemplate
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,10 +65,10 @@ spec:
               forProvider:
                 properties:
                   body:
-                    description: The JSON body of the template.
+                    description: The JSON body of the index template.
                     type: string
                   name:
-                    description: Name of the component template to create.
+                    description: The name of the index template.
                     type: string
                 required:
                 - body
@@ -245,11 +246,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: TemplateStatus defines the observed state of Template.
+            description: IndexTemplateStatus defines the observed state of IndexTemplate.
             properties:
               atProvider:
                 properties:
                   id:
+                    description: The name of the index template.
                     type: string
                 type: object
               conditions:

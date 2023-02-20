@@ -1,4 +1,4 @@
-apiVersion: opensearch.opensearch.crossplane.io/v1alpha1
+apiVersion: opensearch.crossplane.io/v1alpha1
 kind: RolesMapping
 metadata:
   annotations:

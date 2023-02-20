@@ -9,8 +9,9 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
-	template "github.com/dkb-bank/provider-opensearch/internal/controller/component/template"
-	templateindex "github.com/dkb-bank/provider-opensearch/internal/controller/index/template"
+	componenttemplate "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/componenttemplate"
+	datastream "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/datastream"
+	indextemplate "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/indextemplate"
 	ismpolicy "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/ismpolicy"
 	ismpolicymapping "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/ismpolicymapping"
 	role "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/role"
@@ -22,8 +23,9 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		template.Setup,
-		templateindex.Setup,
+		componenttemplate.Setup,
+		datastream.Setup,
+		indextemplate.Setup,
 		ismpolicy.Setup,
 		ismpolicymapping.Setup,
 		role.Setup,

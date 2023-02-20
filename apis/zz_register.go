@@ -10,9 +10,7 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/dkb-bank/provider-opensearch/apis/component/v1alpha1"
-	v1alpha1index "github.com/dkb-bank/provider-opensearch/apis/index/v1alpha1"
-	v1alpha1opensearch "github.com/dkb-bank/provider-opensearch/apis/opensearch/v1alpha1"
+	v1alpha1 "github.com/dkb-bank/provider-opensearch/apis/opensearch/v1alpha1"
 	v1alpha1apis "github.com/dkb-bank/provider-opensearch/apis/v1alpha1"
 	v1beta1 "github.com/dkb-bank/provider-opensearch/apis/v1beta1"
 )
@@ -21,8 +19,6 @@ func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
-		v1alpha1index.SchemeBuilder.AddToScheme,
-		v1alpha1opensearch.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 	)

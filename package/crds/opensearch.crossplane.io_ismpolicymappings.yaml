@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: rolesmappings.opensearch.opensearch.crossplane.io
+  name: ismpolicymappings.opensearch.crossplane.io
 spec:
-  group: opensearch.opensearch.crossplane.io
+  group: opensearch.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - opensearch
-    kind: RolesMapping
-    listKind: RolesMappingList
-    plural: rolesmappings
-    singular: rolesmapping
+    kind: IsmPolicyMapping
+    listKind: IsmPolicyMappingList
+    plural: ismpolicymappings
+    singular: ismpolicymapping
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: RolesMapping is the Schema for the RolesMappings API. Provides
-          an Elasticsearch OpenSearch security role mapping.
+        description: IsmPolicyMapping is the Schema for the IsmPolicyMappings API.
+          <no value>
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: RolesMappingSpec defines the desired state of RolesMapping
+            description: IsmPolicyMappingSpec defines the desired state of IsmPolicyMapping
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,105 +64,36 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  andBackendRoles:
-                    description: A list of backend roles.
+                  include:
+                    description: When updating multiple indices, you might want to
+                      include a state filter to only affect certain managed indices.
+                      The background process only applies the change if the index
+                      is currently in the state specified.
                     items:
-                      type: string
-                    type: array
-                  backendRoles:
-                    description: A list of backend roles.
-                    items:
-                      type: string
-                    type: array
-                  description:
-                    description: Description of the role mapping.
-                    type: string
-                  hosts:
-                    description: A list of host names.
-                    items:
-                      type: string
-                    type: array
-                  roleName:
-                    description: The name of the security role.
-                    type: string
-                  roleNameRef:
-                    description: Reference to a Role in opensearch to populate roleName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
+                      additionalProperties:
                         type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  roleNameSelector:
-                    description: Selector for a Role in opensearch to populate roleName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  users:
-                    description: A list of users.
+                      type: object
+                    type: array
+                  indexes:
+                    description: Name of the index to apply the policy to. You can
+                      use an index pattern to update multiple indices at once.
+                    type: string
+                  isSafe:
+                    type: boolean
+                  managedIndexes:
                     items:
                       type: string
                     type: array
+                  policyId:
+                    description: The name of the policy.
+                    type: string
+                  state:
+                    description: After a change in policy takes place, specify the
+                      state for the index to transition to
+                    type: string
+                required:
+                - indexes
+                - policyId
                 type: object
               providerConfigRef:
                 default:
@@ -336,12 +267,11 @@ spec:
             - forProvider
             type: object
           status:
-            description: RolesMappingStatus defines the observed state of RolesMapping.
+            description: IsmPolicyMappingStatus defines the observed state of IsmPolicyMapping.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The name of the security role.
                     type: string
                 type: object
               conditions:

@@ -13,13 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type TemplateObservation struct {
+type IndexTemplateObservation struct {
 
 	// The name of the index template.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
-type TemplateParameters struct {
+type IndexTemplateParameters struct {
 
 	// The JSON body of the index template.
 	// +kubebuilder:validation:Required
@@ -30,51 +30,51 @@ type TemplateParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
-// TemplateSpec defines the desired state of Template
-type TemplateSpec struct {
+// IndexTemplateSpec defines the desired state of IndexTemplate
+type IndexTemplateSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     TemplateParameters `json:"forProvider"`
+	ForProvider     IndexTemplateParameters `json:"forProvider"`
 }
 
-// TemplateStatus defines the observed state of Template.
-type TemplateStatus struct {
+// IndexTemplateStatus defines the observed state of IndexTemplate.
+type IndexTemplateStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        TemplateObservation `json:"atProvider,omitempty"`
+	AtProvider        IndexTemplateObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// Template is the Schema for the Templates API. Provides an Elasticsearch index template resource.
+// IndexTemplate is the Schema for the IndexTemplates API. Provides an Elasticsearch index template resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,opensearch}
-type Template struct {
+type IndexTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TemplateSpec   `json:"spec"`
-	Status            TemplateStatus `json:"status,omitempty"`
+	Spec              IndexTemplateSpec   `json:"spec"`
+	Status            IndexTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// TemplateList contains a list of Templates
-type TemplateList struct {
+// IndexTemplateList contains a list of IndexTemplates
+type IndexTemplateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Template `json:"items"`
+	Items           []IndexTemplate `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	Template_Kind             = "Template"
-	Template_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Template_Kind}.String()
-	Template_KindAPIVersion   = Template_Kind + "." + CRDGroupVersion.String()
-	Template_GroupVersionKind = CRDGroupVersion.WithKind(Template_Kind)
+	IndexTemplate_Kind             = "IndexTemplate"
+	IndexTemplate_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: IndexTemplate_Kind}.String()
+	IndexTemplate_KindAPIVersion   = IndexTemplate_Kind + "." + CRDGroupVersion.String()
+	IndexTemplate_GroupVersionKind = CRDGroupVersion.WithKind(IndexTemplate_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&Template{}, &TemplateList{})
+	SchemeBuilder.Register(&IndexTemplate{}, &IndexTemplateList{})
 }

@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: ismpolicymappings.opensearch.opensearch.crossplane.io
+  name: roles.opensearch.crossplane.io
 spec:
-  group: opensearch.opensearch.crossplane.io
+  group: opensearch.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - opensearch
-    kind: IsmPolicyMapping
-    listKind: IsmPolicyMappingList
-    plural: ismpolicymappings
-    singular: ismpolicymapping
+    kind: Role
+    listKind: RoleList
+    plural: roles
+    singular: role
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: IsmPolicyMapping is the Schema for the IsmPolicyMappings API.
-          <no value>
+        description: Role is the Schema for the Roles API. Provides an Elasticsearch
+          OpenSearch security role resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: IsmPolicyMappingSpec defines the desired state of IsmPolicyMapping
+            description: RoleSpec defines the desired state of Role
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,36 +64,67 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  include:
-                    description: When updating multiple indices, you might want to
-                      include a state filter to only affect certain managed indices.
-                      The background process only applies the change if the index
-                      is currently in the state specified.
-                    items:
-                      additionalProperties:
-                        type: string
-                      type: object
-                    type: array
-                  indexes:
-                    description: Name of the index to apply the policy to. You can
-                      use an index pattern to update multiple indices at once.
-                    type: string
-                  isSafe:
-                    type: boolean
-                  managedIndexes:
+                  clusterPermissions:
+                    description: A list of cluster permissions.
                     items:
                       type: string
                     type: array
-                  policyId:
-                    description: The name of the policy.
+                  description:
+                    description: Description of the role.
                     type: string
-                  state:
-                    description: After a change in policy takes place, specify the
-                      state for the index to transition to
+                  indexPermissions:
+                    description: A configuration of index permissions (documented
+                      below).
+                    items:
+                      properties:
+                        allowedActions:
+                          description: A list of allowed actions.
+                          items:
+                            type: string
+                          type: array
+                        documentLevelSecurity:
+                          description: A selector for [document-level security][2]
+                            (json formatted using jsonencode).
+                          type: string
+                        fieldLevelSecurity:
+                          description: A list of selectors for field-level security.
+                          items:
+                            type: string
+                          type: array
+                        indexPatterns:
+                          description: A list of glob patterns for the index names.
+                          items:
+                            type: string
+                          type: array
+                        maskedFields:
+                          description: A list of masked fields.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  roleName:
+                    description: The name of the security role.
                     type: string
+                  tenantPermissions:
+                    description: A configuration of tenant permissions (documented
+                      below).
+                    items:
+                      properties:
+                        allowedActions:
+                          description: A list of allowed actions.
+                          items:
+                            type: string
+                          type: array
+                        tenantPatterns:
+                          description: A list of glob patterns for the tenant names.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                 required:
-                - indexes
-                - policyId
+                - roleName
                 type: object
               providerConfigRef:
                 default:
@@ -267,11 +298,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: IsmPolicyMappingStatus defines the observed state of IsmPolicyMapping.
+            description: RoleStatus defines the observed state of Role.
             properties:
               atProvider:
                 properties:
                   id:
+                    description: The name of the security role.
                     type: string
                 type: object
               conditions:

@@ -16,6 +16,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"elasticsearch_opensearch_ism_policy":         config.IdentifierFromProvider,
 	"elasticsearch_opensearch_ism_policy_mapping": config.IdentifierFromProvider,
 	"elasticsearch_component_template":            config.IdentifierFromProvider,
+	"elasticsearch_ingest_pipeline":               config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

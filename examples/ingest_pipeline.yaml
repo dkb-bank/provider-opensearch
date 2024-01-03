@@ -1,0 +1,23 @@
+apiVersion: opensearch.crossplane.io/v1alpha1
+kind: IngestPipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearch/v1alpha1/role
+  labels:
+    testing.upbound.io/example-name: test-ingest-pipeline
+  name: test-ingest-pipeline
+spec:
+  forProvider:
+    name: test-ingest-pipeline
+    body: |
+      {
+        "description" : "Test pipeline",
+        "processors" : [
+          {
+            "set" : {
+              "field": "foo",
+              "value": "bar"
+            }
+          }
+        ]
+      }

@@ -12,6 +12,7 @@ import (
 	componenttemplate "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/componenttemplate"
 	datastream "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/datastream"
 	indextemplate "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/indextemplate"
+	ingestpipeline "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/ingestpipeline"
 	ismpolicy "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/ismpolicy"
 	ismpolicymapping "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/ismpolicymapping"
 	role "github.com/dkb-bank/provider-opensearch/internal/controller/opensearch/role"
@@ -26,6 +27,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		componenttemplate.Setup,
 		datastream.Setup,
 		indextemplate.Setup,
+		ingestpipeline.Setup,
 		ismpolicy.Setup,
 		ismpolicymapping.Setup,
 		role.Setup,

@@ -13,6 +13,7 @@ import (
 	elasticsearchcomponenttemplate "github.com/dkb-bank/provider-opensearch/config/elasticsearchcomponenttemplate"
 	elasticsearchdatastream "github.com/dkb-bank/provider-opensearch/config/elasticsearchdatastream"
 	elasticsearchindextemplate "github.com/dkb-bank/provider-opensearch/config/elasticsearchindextemplate"
+        elasticsearchingestpipeline "github.com/dkb-bank/provider-opensearch/config/elasticsearchingestpipeline"
 	opensearchismpolicy "github.com/dkb-bank/provider-opensearch/config/opensearchismpolicy"
 	opensearchismpolicymapping "github.com/dkb-bank/provider-opensearch/config/opensearchismpolicymapping"
 	opensearchrole "github.com/dkb-bank/provider-opensearch/config/opensearchrole"
@@ -49,6 +50,7 @@ func GetProvider() *ujconfig.Provider {
 		opensearchismpolicymapping.Configure,
 		opensearchrolemapping.Configure,
 		elasticsearchcomponenttemplate.Configure,
+		elasticsearchingestpipeline.Configure,
 	} {
 		configure(pc)
 	}
